@@ -8,6 +8,7 @@ from posts.models import Comment, Post, Group, Follow, User
 
 
 class Base64ImageField(serializers.ImageField):
+    """Сериализатор для поля с картинкой."""
     def to_internal_value(self, data):
         if isinstance(data, str) and data.startswith('data:image'):
             format, imgstr = data.split(';base64,')
