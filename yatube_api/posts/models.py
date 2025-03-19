@@ -17,6 +17,7 @@ class Group(models.Model):
     class Meta:
         verbose_name = "Сообщество"
         verbose_name_plural = "Сообщества"
+        ordering = ('title',)
 
     def __str__(self):
         return self.title
@@ -39,6 +40,17 @@ class Follow(models.Model):
     class Meta:
         verbose_name = "Подписка"
         verbose_name_plural = "Подписки"
+        ordering = ('following',)
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'following'],
+                name='unique_following_check'
+            ),
+            models.CheckConstraint(
+                check=~models.Q(user=models.F("following")),
+                name='self_following_check'
+            ),
+        ]
 
     def __str__(self):
         return self.following
@@ -59,6 +71,7 @@ class Post(models.Model):
     class Meta:
         verbose_name = "Публикация"
         verbose_name_plural = "Публикации"
+        ordering = ('-pub_date',)
 
     def __str__(self):
         return self.text[:MAX_TITLE_LENGTH]
@@ -76,6 +89,7 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "Комментарий"
         verbose_name_plural = "Комментарии"
+        ordering = ('-created',)
 
     def __str__(self):
         return self.text[:MAX_TITLE_LENGTH]
