@@ -4,9 +4,9 @@
 Python 3.9.13    Django    Django Rest Framework    SimpleJWT    SQLite
 ```
 
-Автор проекта - Enigmatica33
+Автор проекта:
 ```
-https://github.com/Enigmatica33
+[Enigmatica33](https://github.com/Enigmatica33)
 ```
 
 ### Как запустить проект:
